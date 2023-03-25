@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace OOP
 {
-    internal class Student : Person
+    internal class Teacher : Person
     {
-        public Student(string first_name, string last_name, string city, DateTime dob) : base(first_name, last_name, city, dob)
+        public Teacher(string first_name, string last_name, string city, DateTime dob) : base(first_name, last_name, city, dob)
         {
         }
 
-        public Student(string first_name, string last_name) : base(first_name, last_name)
+        public Teacher(string first_name, string last_name) : base(first_name, last_name)
         {
         }
 
-        public Student() : base()
+        public Teacher() : base()
         {
         }
 
@@ -30,22 +30,22 @@ namespace OOP
                 for (int i = 0; i < n; i++)
                     Courses[i].Print();
             }
-            else Console.WriteLine("There is no courses for this student");
-            Console.WriteLine(new String('_',50));
+            else Console.WriteLine("There is no courses for this Teacher");
+            Console.WriteLine(new String('_', 50));
         }
 
         public override void AddCourse(Course course)
         {
-           var i = Array.IndexOf(Courses, null);
+            var i = Array.IndexOf(Courses, null);
             Courses[i] = course;
-            course.AddStudentToGroup();
+            course.Teacher = this;
         }
 
         public override void DeleteCourse(Course course)
         {
             var i = Array.IndexOf(Courses, null) - 1;
             Courses[i] = null;
-            course.DeleteStudentFromGroup();
+            course.Teacher = new Teacher();
         }
 
     }
