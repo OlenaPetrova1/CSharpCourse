@@ -10,36 +10,54 @@ namespace OOP
     {
         static void Main(string[] args)
         {
-            Student student1 = new Student();
-            student1.DescribeYourself();
+            //ADD AND DELETE STUDENTS TO TEACHER
+            Teacher teacher1 = new Teacher("Teacher1","");
 
-            Student student2 = new Student("Petrova", "Olena", "Kyiv", new DateTime(1982,07,21));
-            student2.DescribeYourself();
+            var students = new List<Student>()
+            {
+                new Student("Student1", ""),
+                new Student("Student2", ""),
+                new Student("Student3", ""),
+                new Student("Student4", ""),
+                new Student("Student5", "")
+            };
 
-            Teacher teacher1 = new Teacher("Oleg","Shevchuk");
-
-            Course course1 = new Course();
-            course1.Print();
-
-            Course course2 = new Course("C# course");
-            teacher1.AddCourse(course2);
-            course2.Print();
-            teacher1.AddCourse(course1);
-            course1.Print();
-
-            student2.AddCourse(course2);
-            //student2.AddCourse(course1);
-            //student2.DescribeYourself();
+            teacher1.Students.AddRange(students);
             teacher1.DescribeYourself();
-            teacher1.DeleteCourse(course1);
-            course1.Print();
+            Student student6 = new Student("Student6","");
+            teacher1.AddStudent(student6);
+            teacher1.RemoveStudentByName("Student4");
             teacher1.DescribeYourself();
-            //student1.AddCourse(course2);
-            //student1.DescribeYourself();
 
-            //student1.DeleteCourse(course2);
-            //student1.DescribeYourself();
-            //student2.DescribeYourself();
+            //////////////////////////////////////////
+            //ADD STUDENTS TO COURSE
+            Course course1 = new Course("C# course");
+            course1.AddStudentToGroup(student6);
+            course1.Students.AddRange(students);
+            course1.Print();
+            course1.DeleteStudentFromGroup(student6);
+            course1.Print();
+
+            ///////////////////////////////////////
+            //ADD COURSES TO STUDENT
+            var courses = new List<Course>()
+            {
+                new Course("Course2"),
+                new Course("Course3"),
+                new Course("Course4")
+            };
+            Course course5 = new Course("Course5"); 
+            student6.Courses.AddRange(courses);
+            student6.AddCourse(course5);
+            student6.DescribeYourself();
+            student6.DeleteCourse(course5);
+            student6.DescribeYourself();
+
+            ///////////////////////////////////////////
+            //ADD COURSES TO TEACHER
+            teacher1.AddCourse(course5);
+            teacher1.Courses.AddRange(courses);
+            teacher1.DescribeYourself();
         }
     }
 

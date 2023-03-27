@@ -23,29 +23,24 @@ namespace OOP
         public override void DescribeYourself()
         {
             Console.WriteLine($"First_Name = {First_Name}, Last_Name = {Last_Name},City = {City}, Age = {Age}");
-            var n = Array.IndexOf(Courses, null);
-            if (n != 0)
+            if (Courses.Count != 0)
             {
-                Console.WriteLine("Courses :");
-                for (int i = 0; i < n; i++)
-                    Courses[i].Print();
+                Console.WriteLine($"Courses for {First_Name} {Last_Name} :");
+                foreach (var course in Courses)
+                    Console.WriteLine(course.Course_name);
             }
             else Console.WriteLine("There is no courses for this student");
-            Console.WriteLine(new String('_',50));
+            Console.WriteLine(new String('_', 50));
         }
 
         public override void AddCourse(Course course)
         {
-           var i = Array.IndexOf(Courses, null);
-            Courses[i] = course;
-            course.AddStudentToGroup();
+            this.Courses.Add(course);
         }
 
         public override void DeleteCourse(Course course)
         {
-            var i = Array.IndexOf(Courses, null) - 1;
-            Courses[i] = null;
-            course.DeleteStudentFromGroup();
+            this.Courses.Remove(course);
         }
 
     }
