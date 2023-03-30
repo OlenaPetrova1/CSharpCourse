@@ -52,19 +52,70 @@ namespace OOP
             course.Teacher = new Teacher();
         }
 
+        public void AddCoursesByFilter(List<Course> courses, string filter)
+        {
+            var crs = courses.Where(x => x.Course_name.Contains(filter));
+            this.Courses.AddRange(crs);
+            foreach (var course in crs)
+            {
+                course.Teacher = this;
+            }
+        }
+
         public void AddStudent(Student student)
         {
             this.Students.Add(student);
         }
+        public void AddStudentsByFilter(List<Student> students)
+        {
+            try
+            {
+                Console.WriteLine($"Add student to teacher {this.First_Name} by filter. Enter student Name ");
+                var filter = Console.ReadLine();
+                var st = students.Where(x => x.First_Name.Contains(filter));
+
+                if (st.Count() == 0 )
+                    throw new StudentNameException("There is no student with such name ");
+                
+                this.Students.AddRange(st);
+                foreach (var s in st)
+                {
+                    Console.WriteLine($"{s.First_Name} is added to teacher {this.First_Name}");
+                }
+            } 
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Console.WriteLine("---------------------------------------");
+            }
+
+        }
          
         public void RemoveStudentByName(string name)
         {
-            foreach (var st in Students)
-                if (st.First_Name == name)
-                {
-                    Students.Remove(st);
-                    break;
-                }
+            try
+            {
+                Console.WriteLine($"Remove student by name {name} from teacher {this.First_Name}");
+                var st = Students.Where(x => x.First_Name.Contains(name));
+
+                if (st.Count() == 0)
+                    throw new StudentNameException("There is no student with such name ");
+
+                foreach (var s in Students)
+                    if (s.First_Name == name)
+                    {
+                        Students.Remove(s);
+                        Console.WriteLine($"{s.First_Name} is removed from {this.First_Name}");
+                        break;
+                    }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
 

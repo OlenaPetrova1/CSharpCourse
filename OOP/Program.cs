@@ -12,6 +12,7 @@ namespace OOP
         {
             //ADD AND DELETE STUDENTS TO TEACHER
             Teacher teacher1 = new Teacher("Teacher1","");
+            Teacher teacher2 = new Teacher("Teacher2", "");
 
             var students = new List<Student>()
             {
@@ -19,46 +20,75 @@ namespace OOP
                 new Student("Student2", ""),
                 new Student("Student3", ""),
                 new Student("Student4", ""),
-                new Student("Student5", "")
+                new Student("student5", ""),
+                new Student("student35", ""),
             };
 
             teacher1.Students.AddRange(students);
-            teacher1.DescribeYourself();
-            Student student6 = new Student("Student6","");
-            teacher1.AddStudent(student6);
-            teacher1.RemoveStudentByName("Student4");
-            teacher1.DescribeYourself();
+            teacher2.AddStudentsByFilter(students);    //exception if there is no such student
+            teacher1.RemoveStudentByName("Student3");  //exception if there is no such student
+
+            var teachers = new List<Teacher>();
+            teachers.Add(teacher1);
+            teachers.Add(teacher2);
+            /////////////////////////////////////////////
+            ////ADD COURSES TO TEACHER
+            var courses = new List<Course>()
+            {
+                new Course("Course1"),
+                new Course("Course2"),
+                new Course("Course3"),
+                new Course("Course4"),
+                new Course("Math course"),
+                new Course("C# course")
+        };
+
+            teacher1.AddCoursesByFilter(courses, "Course");
+            teacher2.AddCoursesByFilter(courses, "course");
 
             //////////////////////////////////////////
             //ADD STUDENTS TO COURSE
-            Course course1 = new Course("C# course");
-            course1.AddStudentToGroup(student6);
-            course1.Students.AddRange(students);
-            course1.Print();
-            course1.DeleteStudentFromGroup(student6);
-            course1.Print();
+            var course1 = courses.Find(x => x.Course_name.Equals("Course1"));
+            course1.AddStudentsToGroupByFilter(students, "Student");
+            var course2 = courses.Find(x => x.Course_name.Equals("Math course"));
+            course2.AddStudentsToGroupByFilter(students, "student");
+            var course3 = courses.Find(x => x.Course_name.Equals("Course3"));
+            course3.AddStudentsToGroupByFilter(students, "dent");
 
-            ///////////////////////////////////////
-            //ADD COURSES TO STUDENT
-            var courses = new List<Course>()
+            /////////////////////////////////////////
+            Console.WriteLine("==============================================");
+            Console.WriteLine("STUDENTS INFORMATION");
+            Console.WriteLine("==============================================");
+            foreach (var student in students)
             {
-                new Course("Course2"),
-                new Course("Course3"),
-                new Course("Course4")
-            };
-            Course course5 = new Course("Course5"); 
-            student6.Courses.AddRange(courses);
-            student6.AddCourse(course5);
-            student6.DescribeYourself();
-            student6.DeleteCourse(course5);
-            student6.DescribeYourself();
+                student.DescribeYourself();
+            }
+            /////////////////////////////////////////
+            Console.WriteLine("==============================================");
+            Console.WriteLine("TEACHER INFORMATION");
+            Console.WriteLine("==============================================");
+            foreach (var teacher in teachers)
+            {
+                teacher.DescribeYourself();
+            }
+            /////////////////////////////////////////
+            Console.WriteLine("==============================================");
+            Console.WriteLine("COURSES INFORMATION");
+            Console.WriteLine("==============================================");
+            foreach (var course in courses)
+            {
+                course.Print();
+            }
 
-            ///////////////////////////////////////////
-            //ADD COURSES TO TEACHER
-            teacher1.AddCourse(course5);
-            teacher1.Courses.AddRange(courses);
-            teacher1.DescribeYourself();
         }
+    }
+
+    class StudentNameException : ArgumentException
+    {
+        public StudentNameException (string message) : base (message)
+        {
+        }
+        
     }
 
 

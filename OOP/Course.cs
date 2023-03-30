@@ -44,6 +44,7 @@ namespace OOP
             Console.WriteLine($"Course_name = {Course_name}, Teacher_name = {Teacher.First_Name} {Teacher.Last_Name}, Course_duration = {Course_duration}, Number of students = {Students.Count}");
             Console.WriteLine("List of students for this course :");
             foreach (Student student in Students) Console.WriteLine(student.First_Name);
+            Console.WriteLine("----------------------------------------------");
         }
 
         public void AddStudentToGroup(Student student)
@@ -51,6 +52,16 @@ namespace OOP
             this.Students.Add(student);
             this.Number_of_students = this.Students.Count;
             student.Courses.Add(this);
+        }
+
+        public void AddStudentsToGroupByFilter(List<Student> students,string filter)
+        {
+            var st = students.Where(x => x.First_Name.Contains(filter));
+            this.Students.AddRange(st);
+            foreach (Student student in st)
+            {
+                student.Courses.Add(this);
+            }
         }
 
         public void DeleteStudentFromGroup(Student student)
