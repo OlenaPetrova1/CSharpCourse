@@ -1,60 +1,89 @@
-﻿using System;
-
 namespace HomeWork2
 {
-    internal class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            int a = 5;
-            int b = 10;
-            int sum = a + b;
-            Console.WriteLine($"{a} + {b} = {sum}");
 
-            double div = (double)a / b;
-            Console.WriteLine($"{a} / {b} = {div}");
+            var builder = WebApplication.CreateBuilder(args);
 
-            double res;
-            res = -1 + 4 * 6;
-            Console.WriteLine($"-1 + 4*6 = {res}");
+            // Add services to the container.
+            builder.Services.AddRazorPages();
+            builder.Services.AddTransient<ICar,Car>();
+            var app = builder.Build();
 
-            res = (35 + 5) % 7;
-            Console.WriteLine($"(35 + 5) % 7 = {res}");
+            app.Map("/GetCarName", HandleMapGetCarName);
+            app.Map("/GetCarEngine", HandleMapGetCarEngine);
+            app.Map("/GetCarAge", HandleMapGetCarAge);
 
-            //res = 14.0 + -4.0 * 6.0 / 11.0;
-            res = 14 + (double)-4 * 6 / 11;
-            Console.WriteLine($"14 + -4 * 6 / 11 = {res}");
 
-            res = 2 + (double)15 / 6 * 1 - 7 % 2;
-            Console.WriteLine($"2 + 15 / 6 * 1 - 7 % 2 = {res}");
+            app.Run(async context =>
+            {
+                var car = app.Services.GetService<ICar>();
+                await context.Response.WriteAsync($"MY CAR : {car?.GetCarName()}  {car?.GetCarEngine()}  {car?.GetCarAge()} years ");
+            });
 
-            //--------------------------------------------------
 
-            Console.WriteLine("Input first number ");
-            a = Convert.ToInt32(Console.ReadLine());
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
-            Console.WriteLine("Input second number ");
-            b = Convert.ToInt32(Console.ReadLine());
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
-            Console.WriteLine($"First number = {a}, Second number = {b}");
+            app.UseRouting();
 
-            int temp = a; 
-            a = b; b = temp;
+            app.UseAuthorization();
 
-            Console.WriteLine($"First number = {a}, Second number = {b}");
+            app.MapRazorPages();
 
-            //---------------------------------------------------
+            app.Run();
+          
 
-            Console.WriteLine("Input the first number to multiply ");
-            a = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("Input the second number to multiply ");
-            b = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("Input the third number to multiply ");
-            int c = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine($"Multiplication of three numbers = {a * b * c}");
         }
+        private static void HandleMapGetCarName(IApplicationBuilder app)
+        {
+            app.Run(async context =>
+            {
+                var car = app.ApplicationServices.GetService<ICar>();
+                await context.Response.WriteAsync($"Car Name : {car?.GetCarName()}");
+            });
+        }
+
+        private static void HandleMapGetCarEngine(IApplicationBuilder app)
+        {
+            app.Run(async context =>
+            {
+                var car = app.ApplicationServices.GetService<ICar>();
+                await context.Response.WriteAsync($"Car Engine : {car?.GetCarEngine()}");
+            });
+        }
+
+        private static void HandleMapGetCarAge(IApplicationBuilder app)
+        {
+            app.Run(async context =>
+            {
+                var car = app.ApplicationServices.GetService<ICar>();
+                await context.Response.WriteAsync($"Car Age : {car?.GetCarAge()}");
+            });
+        }
+    }
+    public interface ICar
+    {
+        string GetCarName();
+        int GetCarEngine();
+        int GetCarAge();
+    }
+
+    public class Car : ICar
+    {
+        public string GetCarName() => "Nissan XTrail";
+        public int GetCarEngine() => 2000;
+        public int GetCarAge() => DateTime.Now.Year - 2018;
+
     }
 }
