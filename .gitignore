@@ -20,3 +20,5 @@ CSharpCoursePart2/obj/
 Part1/
 HomeWork2/wwwroot/
 HomeWork2/Pages/
+HomeWork2/appsettings.Development.json
+HomeWork2/appsettings.json
