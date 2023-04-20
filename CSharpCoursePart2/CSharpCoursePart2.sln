@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeWork1", "HomeWork1.csproj", "{EE5D9119-3900-4BBE-8255-C61FCF1AE01F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeWork1", "HomeWork1.csproj", "{EE5D9119-3900-4BBE-8255-C61FCF1AE01F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeWork2", "..\HomeWork2\HomeWork2.csproj", "{9D83F1F2-21A8-402F-B2D7-F52D377402D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeWork2", "..\HomeWork2\HomeWork2.csproj", "{9D83F1F2-21A8-402F-B2D7-F52D377402D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeWork3", "..\HomeWork3\HomeWork3.csproj", "{DE600874-D6AA-46EF-9F5F-EA165E2FAD1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeWork3", "..\HomeWork3\HomeWork3.csproj", "{DE600874-D6AA-46EF-9F5F-EA165E2FAD1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeWork4", "..\HomeWork4\HomeWork4.csproj", "{2BA673E1-51DD-4E34-AE21-BA52407BFE4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{DE600874-D6AA-46EF-9F5F-EA165E2FAD1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE600874-D6AA-46EF-9F5F-EA165E2FAD1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE600874-D6AA-46EF-9F5F-EA165E2FAD1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BA673E1-51DD-4E34-AE21-BA52407BFE4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BA673E1-51DD-4E34-AE21-BA52407BFE4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BA673E1-51DD-4E34-AE21-BA52407BFE4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BA673E1-51DD-4E34-AE21-BA52407BFE4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
