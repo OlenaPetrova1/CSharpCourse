@@ -1,0 +1,34 @@
+body {
+    background-color: #f6c018
+}
+
+table, th, td {
+    border: 30px solid #f6c018;
+    border-collapse: collapse;
+    margin-top: 150px;
+    width: 1000px;
+}
+
+td {
+    background-color: white;
+    vertical-align: top;
+    text-align: center;
+}
+
+h1 {
+    position: relative;
+    top: 100px;
+}
+
+tr {
+    height: 400px;
+}
+
+button {
+    background-color: black;
+    height: 40px;
+    width: 150px;
+    color: white;
+    margin: 0 auto;
+    display: block;
+}
